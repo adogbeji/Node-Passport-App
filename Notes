@@ -1,24 +1,21 @@
 Important Points:-
 
 1) The 'connect-flash' package is for flash messaging & depends on express-session package
-2) Keep your server routes in separate files within 'routes' folder
-3) The 'expressLayouts' Middleware MUST be above app.set("view engine", "ejs"), or else layouts won't work!
-4) Output views in EJS with this syntax: <%- body %>
-5) File for outputting views must be called 'layout' NOT 'layouts'!!
-6) Comments don't work in EJS - delete code if you don't need it!!
-7) Mongo Connection URI is stored in 'keys.js' file inside 'config' folder.
-8) Mongoose Model is kept in separate file within 'models' folder
-9) A 'partial' is a piece of HTML we want to put within another HTML Template File
-10) EJS is JavaScript inside of HTML and you must wrap any JavaScript with scriptlet tags(<% %>) on a line-by-line basis
-11) Registration/Login error messages should be wrapped in Bootstrap Alert Markup. Go to: Bootstrap --> Components --> Alerts --> Dismissing
-12) to show success/failure message AFTER a redirect, you need to use a 'Flash Message'. This will store the message in a session and display it after the redirect.
-    Use 'connect-flash' & 'express-session' NPM packages to do this. Check out express-session on GitHub.
+2) For an API, keep your server routes in separate files within 'routes' folder
+3) Mongo Connection URI is stored in 'keys.js' file inside 'config' folder.
+4) Mongoose Model is kept in separate file within 'models' folder
+5) A 'partial' is a piece of HTML we want to put within another HTML Template File
+6) Output partial in EJS with this syntax: <%- -%>
+7) EJS is JavaScript inside of HTML and you must wrap any JavaScript with scriptlet tags(<% %>) on a line-by-line basis
+8) Registration/Login error messages should be wrapped in Bootstrap Alert Markup. Go to: Bootstrap --> Components --> Alerts --> Dismissing
+9) To show success/failure message AFTER a redirect, you need to use a 'Flash Message'. This will store message in the session and display it after the redirect.
+   Use 'connect-flash' & 'express-session' NPM packages to do this. Check out express-session on GitHub.
 
-13) Set global variables in this format:
+10) Set global variables in this format:
 
       res.locals.variable_name
 
-14) As good practice, keep Passport Local Strategy in a config file! Read Passport.js Docs too!!
-15) Use req.flash() whenever you want to send a flash message.
-16) Make sure Account Page can only be accessed upon successful authentication. Implement 'ensureAuthenticated' Middleware inside 'auth.js' file within 'config' folder.
+11) As good practice, keep Passport Local Strategy in a config file! Read Passport.js Docs too!!
+12) Use req.flash() whenever you want to send a flash message.
+13) Make sure Account Page can only be accessed upon successful authentication. Implement 'ensureAuthenticated' Middleware inside 'auth.js' file within 'config' folder.
     Add this middleware to ANY route that needs to be protected!!
