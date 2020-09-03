@@ -79,7 +79,7 @@ exports.createAccount = (req, res) => {
       errors, name, email, password, password2
     });
   } else {
-    //Validation passeed
+    //Validation passed
     User.findOne({email: email})
     .then(user => {
       //If user exists
