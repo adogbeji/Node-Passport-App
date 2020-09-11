@@ -146,7 +146,8 @@ exports.updateAccountDetails = (req, res) => {
     res.render("update", {errors});
   }
 
-  if (name !== "" && email !== "") {
+  // Check for completed fields
+  if (name !== "" && email !== "" && password !== "") {
     User.updateMany({name: req.user.name}, {$set: {name: req.body.name, email: req.body.email, password: req.body.password}})
     .then(update => {
       if (update) {
@@ -164,6 +165,26 @@ exports.updateAccountDetails = (req, res) => {
     });
   }
 
+  // Check for Name & Email
+  if (name !== "" && email !== "") {
+    User.updateMany({name: req.user.name}, {$set: {name: req.body.name, email: req.body.email}})
+    .then(update => {
+      if (update) {
+        success.push({
+          message: "Name and Email have been updated!"
+        });
+        res.render("update", {success, name, email});
+      }
+    })
+    .catch(err => {
+      errors.push({
+        message: "An error occurred, please try again!"
+      });
+      res.render("update", {errors});
+    });
+  }
+
+  // Check for Name
   if (name !== "") {
     User.updateOne({name: req.user.name}, {$set: {name: req.body.name}})
     .then(update => {
@@ -182,6 +203,8 @@ exports.updateAccountDetails = (req, res) => {
     });
   }
 
+
+  // Check for Email
   if (email !== "") {
     User.updateOne({email: req.user.email}, {$set: {email: req.body.email}})
     .then(update => {
