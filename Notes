@@ -17,6 +17,6 @@ Important Points:-
 
 11) As good practice, keep Passport Local Strategy in a config file! Read Passport.js Docs too!!
 12) Use req.flash() whenever you want to send a flash message.
-13) The Passport flash message is stored in req.flash('error') --> global variable MUST be 'req.locals.error'
+13) The Passport flash message is stored in req.flash('error') --> global variable MUST be 'res.locals.error'
 14) Make sure Account Page can only be accessed upon successful authentication. Implement 'ensureAuthenticated' Middleware inside 'auth.js' file within 'config' folder.
     Add this middleware to ANY route that needs to be protected!!
