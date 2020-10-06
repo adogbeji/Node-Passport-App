@@ -134,7 +134,7 @@ exports.updateAccountDetails = (req, res) => {
   let errors = [];
   let success = [];
 
-  //Check for completed field
+  //Check for missing fields
   if (!name && !email && !password) {
     errors.push({
       message: "Please update at least ONE field below!"
