@@ -184,6 +184,44 @@ exports.updateAccountDetails = (req, res) => {
     });
   }
 
+  // Check for Name & Password
+  if (name !== "" && password !== "") {
+    User.updateMany({name: req.user.name}, {$set: {name: req.body.name, password: req.body.password}})
+    .then(update => {
+      if (update) {
+        success.push({
+          message: "Name and Password have been updated!"
+        });
+        res.render("update", {success, name});
+      }
+    })
+    .catch(err => {
+      errors.push({
+        message: "An error occurred, please try again!"
+      });
+      res.render("update", {errors});
+    });
+  }
+
+  // Check for Password & Email
+  if (email !== "" && password !== "") {
+    User.updateMany({email: req.user.email}, {$set: {email: req.body.email, password: req.body.password}})
+    .then(update => {
+      if (update) {
+        success.push({
+          message: "Email and Password have been updated!"
+        });
+        res.render("update", {success, name});
+      }
+    })
+    .catch(err => {
+      errors.push({
+        message: "An error occurred, please try again!"
+      });
+      res.render("update", {errors});
+    });
+  }
+
   // Check for Name
   if (name !== "") {
     User.updateOne({name: req.user.name}, {$set: {name: req.body.name}})
@@ -224,6 +262,21 @@ exports.updateAccountDetails = (req, res) => {
   }
 
   if (password !== "") {
+
+    //Check password length
+  if (password.length < 6) {
+    errors.push({
+      message: "Password should be AT LEAST 6 characters!"
+    });
+  }
+
+  //Page will be re-rendered if any validaton checks fail
+  if (errors.length > 0) {
+    res.render("update", {
+      errors, name, email, password
+    });
+  } else {
+    // Validaton passed
     bcrypt.genSalt(saltRounds, (err, salt) => {
     bcrypt.hash(password, salt, (err, hash) => {
       if (err) throw err;
@@ -246,6 +299,7 @@ exports.updateAccountDetails = (req, res) => {
     });
    });
   }
+ }
 };
 
 exports.accountDetailsLoginPage = (req, res, next) => {
